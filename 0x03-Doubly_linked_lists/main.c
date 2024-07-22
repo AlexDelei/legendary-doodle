@@ -111,6 +111,25 @@ list_t *pop(list_t **h)
 }
 
 /**
+* dl_pop - pops our first element in the doubly linked list
+ */
+dlist_t *dl_pop(dlist_t **h)
+{
+    dlist_t *pop;
+
+    pop = *h;
+    if (*h != NULL)
+    {
+        *h = (*h)->next;
+        if (*h != NULL)
+        {
+            (*h)->prev = NULL;
+        }
+    }
+    return (pop);
+}
+
+/**
 * pop_and_free - pops and frees the first item in the list
  */
  void pop_and_free(list_t **h)
@@ -168,6 +187,9 @@ int main()
     dl_add_node(&dh, "BrosThatCode");
     dl_add_node(&dh, "Ezz Morgan");
     dl_add_node(&dh, "Seba Daniel");
+    dl_print_list(dh);
+    printf("---------------------------\n");
+    dl_pop(&dh);
     dl_print_list(dh);
     printf("---------------------------\n");
     h = NULL;

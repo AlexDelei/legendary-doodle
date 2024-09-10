@@ -1,4 +1,4 @@
-```
+/** 
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -20,8 +20,7 @@ Example 3:
 
 Input: nums = [3,3], target = 6
 Output: [0,1]
-```
-
+*/
 /**
  * @param {number[]} nums
  * @param {number} target
@@ -41,4 +40,59 @@ var twoSum = function(nums, target) {
     }
 };
 
-console.log(twoSum([3, 2, 3], 6))
+
+/**
+ Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+The overall run time complexity should be O(log (m+n)).
+
+Example 1:
+
+Input: nums1 = [1,3], nums2 = [2]
+Output: 2.00000
+Explanation: merged array = [1,2,3] and median is 2.
+Example 2:
+
+Input: nums1 = [1,2], nums2 = [3,4]
+Output: 2.50000
+Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+ */
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var findMedianSortedArrays = function(nums1, nums2) {
+    const size1 = nums1.length;
+    const size2 = nums2.length;
+
+    const arr3 = new Array(nums1 + nums2);
+
+    mergeArrays(nums1, size1, nums2, size2, arr3);
+
+    function mergeArrays(nums1, size1, nums2, size2, arr3) {
+        let i = 0, j = 0, k = 0;
+
+        while (i < size1) {
+            arr3[k++] = nums1[i++];
+        }
+
+        while (j < size2) {
+            arr3[k++] = nums2[j++];
+        }
+
+        arr3.sort(function(a, b) {return a - b});
+    }
+    const len = arr3.length;
+
+    console.log(arr3);
+
+    if ((len % 2) === 0) {
+        const halfOfArray = len / 2;
+        return (arr3[halfOfArray - 1] + arr3[halfOfArray]) / 2;
+    } else {
+        const halfOfArray = Math.floor(len / 2);
+        return arr3[halfOfArray];
+    }
+};
+
+console.log(findMedianSortedArrays([-1, -2, -3], [0]));
